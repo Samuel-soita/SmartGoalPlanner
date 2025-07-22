@@ -1,5 +1,42 @@
+/* Base Setup */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #eef2f7, #dde6f9);
+  color: #2d2d2d;
+  padding: 20px;
+}
+
+/* App Container */
 .App {
   text-align: center;
+}
+
+.App-header {
+  background: #1c1f26;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(12px + 2vmin);
+  color: #fff;
+}
+
+.App-link {
+  color: #90caf9;
+}
+
+/* Logo Animation */
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: logo-spin infinite 20s linear;
+  }
 }
 
 .App-logo {
@@ -7,32 +44,178 @@
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+@keyframes logo-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Form Section */
+.add-goal-form {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 20px;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  margin-bottom: 30px;
+}
+
+.add-goal-form input {
+  flex: 1 1 220px;
+  padding: 10px;
+  border: 1px solid #bbb;
+  border-radius: 10px;
+  transition: border-color 0.3s ease;
+}
+
+.add-goal-form input:focus {
+  border-color: #5e4bff;
+  outline: none;
+}
+
+.add-goal-form button {
+  background-color: #5e4bff;
+  color: white;
+  padding: 10px 24px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-goal-form button:hover {
+  background-color: #4739e0;
+}
+
+/* Grid Layout for Goals */
+.goal-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+/* Goal Cards */
+.goal-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.07);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.goal-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+}
+
+.goal-card h3 {
+  font-size: 1.2rem;
+  color: #222;
+  margin-bottom: 10px;
+}
+
+.goal-card p {
+  color: #555;
+  font-size: 0.95rem;
+  margin-bottom: 14px;
+}
+
+/* Action Buttons */
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.edit-button,
+.delete-button {
+  flex: 1;
+  padding: 8px;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: white;
+  transition: all 0.2s ease;
+}
+
+.edit-button {
+  background-color: #2196f3;
+}
+
+.edit-button:hover {
+  background-color: #1769aa;
+  transform: scale(1.05);
+}
+
+.delete-button {
+  background-color: #f44336;
+}
+
+.delete-button:hover {
+  background-color: #aa2e25;
+  transform: scale(1.05);
+}
+
+/* Deadline Labels */
+.deadline-status {
+  display: inline-block;
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  border-radius: 6px;
+  margin-top: 12px;
+}
+
+.deadline-status.overdue {
+  background-color: #ff5252;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.deadline-status.today {
+  background-color: #ffca28;
+  color: #333;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.deadline-status.upcoming {
+  background-color: #4caf50;
+  color: white;
+}
+
+/* Goal Overview Section */
+.goal-overview {
+  background: white;
+  padding: 24px;
+  border-radius: 16px;
+  margin-top: 40px;
+  max-width: 650px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.05);
+}
+
+.goal-overview h2 {
+  color: #2a2a2a;
+  margin-bottom: 12px;
+}
+
+.goal-overview p {
+  font-size: 1rem;
+  color: #555;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .add-goal-form {
+    flex-direction: column;
   }
-  to {
-    transform: rotate(360deg);
+
+  .goal-overview {
+    width: 100%;
   }
 }
