@@ -112,14 +112,17 @@ return (
   <div className="App">
     <h1>Smart Goal Planner</h1>
     <AddGoalForm onAddGoal={addGoal} />
-    <DepositForm goals={goals} addDeposit={addDeposit} />
+    <DepositForm goals={goals} onAddDeposit={addDeposit} />
     <GoalList
       goals={goals}
       onUpdateGoal={updateGoal}
       onDeleteGoal={deleteGoal}
+      onAddDeposit={addDeposit}
+      
     />
   </div>
 );
+
 }
 export default App;
 

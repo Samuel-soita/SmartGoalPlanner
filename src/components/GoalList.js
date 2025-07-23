@@ -1,8 +1,7 @@
 import GoalCard from './GoalCard';
 
 // This component renders a list of goal cards, each representing a goal with its details.
-
-function GoalList({ goals, onUpdateGoal, onDeleteGoal}){
+function GoalList({ goals, onUpdateGoal, onDeleteGoal, onAddDeposit }) {
     return (
         <div className="goal-list">
             {goals.map((goal) => (
@@ -10,7 +9,8 @@ function GoalList({ goals, onUpdateGoal, onDeleteGoal}){
                     key={goal.id} 
                     goal={goal} 
                     onUpdateGoal={onUpdateGoal} 
-                    onDeleteGoal={onDeleteGoal} 
+                    onDeleteGoal={onDeleteGoal}
+                    onAddDeposit={onAddDeposit}
                 />
             ))}
         </div>

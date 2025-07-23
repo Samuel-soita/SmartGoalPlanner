@@ -2,54 +2,64 @@ import { useState } from "react";
 import ProgressBar from "./ProgressBar";
 import DeadlineStatus from "./DeadlineStatus";
 
+// Component representing a single savings goal card
+function GoalCard({ goal, onUpdateGoal, onDeleteGoal, onAddDeposit }) {
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedGoal, setEditedGoal] = useState({ ...goal });
 
-//function goalcard 
-function GoalCard({ goal, onUpdateGoal, onDeleteGoal }) {
-    const [isEditing, setIsEditing] = useState(false);
-    const [editedGoal, setEditedGoal] = useState({ ...goal });
+  const handleSave = () => {
+    onUpdateGoal(editedGoal);
+    setIsEditing(false);
+  };
 
-    //save changes and exit mode 
-    const handleSave = () => {
-        onUpdateGoal(editedGoal);
-        setIsEditing(false);
-    };
+  const handleDeposit = () => {
+    const depositAmount = parseFloat(prompt("Enter deposit amount:"));
+    if (!isNaN(depositAmount) && depositAmount > 0) {
+      onAddDeposit(goal.id, depositAmount);
+    }
+  };
 
-
-    return (
-        <div className ="goal-card">
-            {isEditing ? (
-                <div className="edit-form">
-                    <input
-                        value={editedGoal.name}
-                        onChange={(e)=>setEditedGoal({...editedGoal, name: e.target.value})}
-                    />
-                    <button onClick={handleSave}>Save</button>
-                    <button onClick={() => setIsEditing(false)}>Cancel</button>
-                </div>
-            ) : (
-                <>
-                <h3>{goal.name}</h3>
-                <p>Category : {goal.category}</p>
-
-                
-                <ProgressBar 
-                    targetAmount={goal.targetAmount} 
-                    savedAmount={goal.savedAmount}
-                />
-                <p>Saved Amount: ${goal.savedAmount}</p>
-                <p>Target Amount: ${goal.targetAmount}</p>
-
-                <DeadlineStatus deadline={goal.deadline} />
-
-                <button onClick={() => setIsEditing(true)}>Edit</button>
-                <button onClick={() => onDeleteGoal(goal.id)}>Delete</button>
-
-
-                </>
-            )}
-        </div>
-    );
-
+  return (
+    <div className="goal-card">
+      {isEditing ? (
+        <>
+          <input
+            type="text"
+            value={editedGoal.title}
+            onChange={(e) =>
+              setEditedGoal({ ...editedGoal, title: e.target.value })
+            }
+          />
+          <input
+            type="number"
+            value={editedGoal.targetAmount}
+            onChange={(e) =>
+              setEditedGoal({ ...editedGoal, targetAmount: parseFloat(e.target.value) })
+            }
+          />
+          <input
+            type="date"
+            value={editedGoal.deadline}
+            onChange={(e) =>
+              setEditedGoal({ ...editedGoal, deadline: e.target.value })
+            }
+          />
+          <button onClick={handleSave}>Save</button>
+        </>
+      ) : (
+        <>
+          <h3>{goal.title}</h3>
+          <p>Target: ${goal.targetAmount}</p>
+          <p>Saved: ${goal.savedAmount}</p>
+          <DeadlineStatus deadline={goal.deadline} />
+          <ProgressBar current={goal.savedAmount} target={goal.targetAmount} />
+          <button onClick={() => setIsEditing(true)}>Edit</button>
+          <button onClick={() => onDeleteGoal(goal.id)}>Delete</button>
+          <button onClick={handleDeposit}>Add Deposit</button>
+        </>
+      )}
+    </div>
+  );
 }
-export default GoalCard;
 
+export default GoalCard;
